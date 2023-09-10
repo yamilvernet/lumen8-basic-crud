@@ -1,24 +1,85 @@
-# Lumen PHP Framework
+# Basic Lumen 8 CRUD
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+Simple REST API to manage elements; In future versions we will add more features such as JWT authentication
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+# Example to use from Javascript
 
-## Official Documentation
+## Get all items
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+    fetch('/items')
+    .then((r)=>r.json())
+    .then((data)=>{
+        console.log(data)
+    })
 
-## Contributing
+## Get item with id 1
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    fetch('/items/1')
+    .then((r)=>r.json())
+    .then((data)=>{
+        console.log(data)
+    })
 
-## Security Vulnerabilities
+## Create new item from Javascript Object
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+    fetch('/items', {
+        method: "POST",
+        body: JSON.stringify({
+            name:'coca cola 3 lt',
+            description:'large soda'
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then((r)=>r.json())
+    .then((data)=>console.log(data))
+    .catch((error)=>console.log(error));
 
-## License
+## Create item with id 1 from Javascript Object
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    fetch('/items/1', {
+        method: "PUT",
+        body: JSON.stringify({
+        name:'coca cola 3.5 lt',
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then((r)=>r.json())
+    .then((data)=>console.log(data))
+    .catch((error)=>console.log(error));
+
+
+## Delete item with id 1
+
+    fetch('/items/1', {
+        method: "DELETE",
+    })
+    .then((r) => r.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
+
+
+# Remember to add .env file
+
+    APP_NAME=Qubit
+    APP_ENV=local
+    APP_KEY=
+    APP_DEBUG=true
+    APP_URL=http://localhost
+    APP_TIMEZONE=UTC
+
+    LOG_CHANNEL=stack
+    LOG_SLACK_WEBHOOK_URL=
+
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=db_name
+    DB_USERNAME=db_username
+    DB_PASSWORD=secret
+
+    CACHE_DRIVER=file
+    QUEUE_CONNECTION=sync
