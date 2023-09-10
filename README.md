@@ -2,6 +2,14 @@
 
 Simple REST API to manage elements; In future versions we will add more features such as JWT authentication
 
+Our Items API will have 5 Endpoints:
+- `GET` /item to get all items data
+- `GET` /item/{id} to get a item by its ID
+- `POST` /item to create new item
+- `PUT` /item/{id} to update a item base on its id
+- `DELETE` /item/{id} to delete a item base on its id
+
+
 # Example to use from Javascript
 
 ## Get all items
