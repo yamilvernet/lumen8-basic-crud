@@ -11,9 +11,8 @@ $router->get('/', function () use ($router) {
 Route::group(['prefix' => 'api'], function ($router) {
     // Auth routes
     Route::post('login', 'AuthController@login');
-    // Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    // Route::post('user-profile', 'AuthController@me');
+    Route::post('register', 'AuthController@register');
 
     // Items routes
     Route::group(['prefix' => 'items'], function ($router) {
