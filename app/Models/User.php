@@ -13,7 +13,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject 
 {
-    protected $fillable = ['name','email','password'];
+    protected $fillable = ['name','email','password','role'];
     use Authenticatable, Authorizable;
 
     /**

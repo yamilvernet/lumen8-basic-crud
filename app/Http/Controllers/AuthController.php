@@ -22,6 +22,7 @@ class AuthController extends Controller{
             'email' => 'required|unique:users|string',
             'password' => 'required|string',
             'secret' => 'required|string',
+            'role' => 'string|nullable',
         ]);
     
         if ($request['secret']!=env('JWT_SECRET')) {
@@ -31,11 +32,15 @@ class AuthController extends Controller{
         $user = User::create([
             'name' => $request['name'], 
             'email' => $request['email'],
-            'password' => Hash::make($request['password'])
+            'password' => Hash::make($request['password']),
         ]);
+
+        if(isset($request['role'])){
+            $user->role = $request['role'];
+        }
     
         // $user->password = Hash::make($request['password']);
-        // $user->save();
+        $user->save();
     
         return response()->json(['message' => 'User registered, please login'], 201);
     }

@@ -14,6 +14,12 @@ Route::group(['prefix' => 'api'], function ($router) {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('register', 'AuthController@register');
 
+
+    Route::get('/itemad', ['middleware' => 'role:admin', 'uses' => 'ItemController@index']);
+    Route::get('/itemad', ['middleware' => 'role:admin', 'uses' => 'ItemController@index']);
+
+
+
     // Items routes
     Route::group(['prefix' => 'items'], function ($router) {
         // Listar todos los items
@@ -21,14 +27,16 @@ Route::group(['prefix' => 'api'], function ($router) {
     
         // Obtener un item por ID
         Route::get('/{id}', 'ItemController@show');
-    
-        // Crear un nuevo item
-        Route::post('/', 'ItemController@store');
-    
-        // Actualizar un item por ID
-        Route::put('/{id}', 'ItemController@update');
-    
-        // Eliminar un item por ID
-        Route::delete('/{id}', 'ItemController@destroy');
+
+        Route::group(['middleware' => 'role:admin'], function ($router) {
+            // Crear un nuevo item
+            Route::post('/','ItemController@store');
+        
+            // Actualizar un item por ID
+            Route::put('/{id}','ItemController@update');
+        
+            // Eliminar un item por ID
+            Route::delete('/{id}','ItemController@destroy');
+        });
     });
 });
